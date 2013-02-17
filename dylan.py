@@ -33,13 +33,12 @@ class LyricParser():
             lyrics = lyrics.replace(punct,'')
         return lyrics
 
-output = open('output.txt','w')
+output = open('alllyrics.txt','w')
 
 parser = LyricParser()
 for root, _, files in os.walk('songs'):
     for file in files:
         print file
-        output.write(file)
         filePath = os.path.join(root,file)
         fileHTML = open(filePath,'r').read().decode('utf-8')
         lyrics = parser.parse(fileHTML)
