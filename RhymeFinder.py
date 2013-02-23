@@ -15,14 +15,13 @@ class RhymeFinder():
     
     def findRhymes(self,word):
         rhymeKey = self.rhymeDict[word.upper()]
-        print rhymeKey
         matchingWords = self.findMatchingWords(rhymeKey)
         return matchingWords
 
     def findTrialingKey(self, rhymeKey):
         for key in reversed(rhymeKey):
             if self.isAVowel(key):
-                return self.trimKey(rhymeKey,key)#rhymeKey[rhymeKey.index(key):]
+                return self.trimKey(rhymeKey,key)
 
     def trimKey(self, rhymeKey, key):
         return rhymeKey[(len(rhymeKey)-rhymeKey[::-1].index(key))-1:]
