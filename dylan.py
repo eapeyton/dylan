@@ -24,14 +24,34 @@ class Dylan():
         try:
             rhymes = self.rhymer.findRhymes(lastWord)
         except KeyError:
-            return "No rhymes found..."
+            return "No rhymes found...\n"
+        random.shuffle(rhymes)
         for word in rhymes:
             if word.lower() in self.lastWordDict:
-                if self.lastWordDict[word.lower()] is not line:
-                    return self.lastWordDict[word.lower()]
-        return "No rhymes found..."
+                rhymingLine = self.lastWordDict[word.lower()]
+                if rhymingLine != line:
+                    return rhymingLine
+        return "No rhymes found...\n"
     def findRandomLine(self):
         return random.choice(self.lyricsLines)
+    def generateRhymeScheme(self,rhymeScheme):
+        rhymeScheme = rhymeScheme.upper()
+        output = []
+        scheme = {}
+        for letter in rhymeScheme:
+            if letter == 'X':
+                output.append(self.findRandomLine())
+            elif letter == ' ':
+                output.append('\n')
+            elif letter not in scheme:
+                scheme[letter] = self.findRandomLine()
+                output.append(scheme[letter])
+            else:
+                rhyming = self.findRhymingLine(scheme[letter])
+                if rhyming in output:
+                    rhyming = self.findRhymingLine(scheme[letter])
+                output.append(rhyming)
+        return ''.join(output)
     def generateLyrics(self,numLines):
         lyrics = ''
         pairs = numLines / 2
@@ -45,12 +65,16 @@ class Dylan():
             lyrics += self.findRandomLine()
         return lyrics
 
-
 dylan = Dylan()
-numLines = raw_input('How many lines? ')
-while(numLines != 'exit'):
-    print ''
-    print dylan.generateLyrics(int(numLines))
-    numLines = raw_input('How many more? ')
+print dylan.generateRhymeScheme('AA BB CC DD')
+
+
+def generateLines():
+    dylan = Dylan()
+    numLines = raw_input('How many lines? ')
+    while(numLines != 'exit'):
+        print ''
+        print dylan.generateLyrics(int(numLines))
+        numLines = raw_input('How many more? ')
 
 
