@@ -1,4 +1,4 @@
 dylan-and-love
 ==============
 
-A test site for now, a project for the future...
+A lyric generator that uses the lyrics of Bob Dylan.
