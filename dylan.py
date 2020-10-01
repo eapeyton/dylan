@@ -4,7 +4,7 @@
 import random
 import RhymeFinder
 
-class Dylan():
+class Dylan:
     def __init__(self):
         self.lyricsLines = open('files/lyrics.txt','r').readlines()
         self.lastWordDict = self.mapLinesToLastWord(self.lyricsLines)
@@ -65,16 +65,16 @@ class Dylan():
             lyrics += self.findRandomLine()
         return lyrics
 
-dylan = Dylan()
-print dylan.generateRhymeScheme('AA BB CC DD')
-
-
 def generateLines():
     dylan = Dylan()
-    numLines = raw_input('How many lines? ')
+    numLines = input('How many lines? ')
     while(numLines != 'exit'):
-        print ''
-        print dylan.generateLyrics(int(numLines))
-        numLines = raw_input('How many more? ')
+        print('')
+        print(dylan.generateLyrics(int(numLines)))
+        numLines = input('How many more? ')
 
 
+if __name__ == "__main__":
+    dylan = Dylan()
+    print(dylan.generateRhymeScheme('AA BB CC DD'))
+    # generateLines()

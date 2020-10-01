@@ -39,7 +39,7 @@ def parseAndWrite():
 
     for root, _, files in os.walk('songs'):
         for file in files:
-            print file
+            print(file)
             filePath = os.path.join(root,file)
             fileHTML = open(filePath,'r').read().decode('utf-8')
             lyrics = parser.parse(fileHTML)
